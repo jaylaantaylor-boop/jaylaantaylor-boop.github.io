@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything</title>
+<!-- The front door. This page holds nothing of its own on purpose: it forwards
+     to the Owner Dashboard, which is the one screen that knows about all four
+     businesses. Keeping it empty means there is no second list of apps here to
+     drift out of step with the real one.
+
+     If the Dashboard ever moves or gets renamed, change the one address below
+     and everything anybody has written down still works. -->
+<link rel="canonical" href="https://jaylaantaylor-boop.github.io/trucks-owner-dashboard2/">
+<!-- Works with JavaScript switched off. -->
+<meta http-equiv="refresh" content="0; url=/trucks-owner-dashboard2/">
+<meta name="theme-color" content="#F2EFE9">
+<style>
+  :root{
+    --page:#F2EFE9; --ink:#211E19; --dim:#6B6558;
+    --display:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+    --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;background:var(--page);color:var(--ink);font-family:var(--body);
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+  }
+  h1{font-family:var(--display);font-size:1.5rem;font-weight:700;margin:0 0 6px;}
+  p{color:var(--dim);font-size:.9rem;margin:0 0 18px;}
+  a{color:var(--ink);font-weight:700;font-size:.95rem;}
+</style>
+</head>
+<body>
+  <div>
+    <h1>Everything</h1>
+    <p>Taking you to the dashboard&hellip;</p>
+    <!-- Only ever seen if both the redirect and the script fail. -->
+    <a href="/trucks-owner-dashboard2/">Open it now</a>
+  </div>
+<script>
+  /* replace(), not assign(): this page must not sit in the back history, or
+     tapping Back from the dashboard would bounce you straight forward again. */
+  location.replace('/trucks-owner-dashboard2/');
+</script>
+</body>
+</html>
