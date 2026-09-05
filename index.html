@@ -2,46 +2,194 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Everything</title>
-<!-- The front door. This page holds nothing of its own on purpose: it forwards
-     to the Owner Dashboard, which is the one screen that knows about all four
-     businesses. Keeping it empty means there is no second list of apps here to
-     drift out of step with the real one.
+<meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-title" content="Panatieri’s">
+<meta name="description" content="Every app for the trucks, the kitchen and the pizzeria, in one place.">
+<!-- The front door.  It used to forward straight to the Owner Dashboard; now it
+     is a real home screen, because it is the first thing anybody sees and a
+     redirect makes six good apps look like a folder of links.
 
-     If the Dashboard ever moves or gets renamed, change the one address below
-     and everything anybody has written down still works. -->
-<link rel="canonical" href="https://jaylaantaylor-boop.github.io/trucks-owner-dashboard2/">
-<!-- Works with JavaScript switched off. -->
-<meta http-equiv="refresh" content="0; url=/trucks-owner-dashboard2/">
-<meta name="theme-color" content="#F2EFE9">
+     NOTE: the list of apps now exists in TWO places — here, and in the "More"
+     sheet of the shell that sits at the bottom of each app.  Change one, change
+     the other.  The canonical copy of that shell is
+     ~/Desktop/claude/shell/shell-snippet.html -->
 <style>
-  :root{
-    --page:#F2EFE9; --ink:#211E19; --dim:#6B6558;
-    --display:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
-    --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  }
-  html,body{height:100%;}
-  body{
-    margin:0;background:var(--page);color:var(--ink);font-family:var(--body);
-    display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
-  }
-  h1{font-family:var(--display);font-size:1.5rem;font-weight:700;margin:0 0 6px;}
-  p{color:var(--dim);font-size:.9rem;margin:0 0 18px;}
-  a{color:var(--ink);font-weight:700;font-size:.95rem;}
+:root{
+  --red:#B5191C; --ink:#111; --muted:#9a9aa6; --line:#2e2e38; --card:#1c1c23;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:#111;color:#fff;
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:26px 16px 90px}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:3px}
+.mark{width:36px;height:36px;border-radius:10px;flex:0 0 auto;object-fit:cover;
+  background:#fff}
+h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.3px}
+.today{color:var(--muted);font-size:12.5px;font-weight:600;margin:0 0 20px 47px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(min-width:620px){ .grid{grid-template-columns:repeat(3,1fr)} }
+a.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 14px;
+  text-decoration:none;color:#fff;display:block;transition:border-color .15s,background .15s}
+a.tile:hover{background:#23232c;border-color:#3d3d49}
+a.tile.wide{grid-column:1/-1;background:var(--red);border-color:var(--red)}
+a.tile.wide:hover{filter:brightness(1.07)}
+.tile svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;display:block;margin-bottom:10px;opacity:.9}
+.tile b{display:block;font-size:14.5px;font-weight:800;letter-spacing:-.1px}
+.tile span{display:block;font-size:11.5px;color:var(--muted);font-weight:600;margin-top:3px;line-height:1.4}
+.tile.wide span{color:rgba(255,255,255,.85)}
+.sec{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7a86;
+  font-weight:800;margin:26px 0 10px}
+.foot{color:#5f5f6b;font-size:11.5px;margin-top:28px;line-height:1.6}
 </style>
 </head>
 <body>
-  <div>
-    <h1>Everything</h1>
-    <p>Taking you to the dashboard&hellip;</p>
-    <!-- Only ever seen if both the redirect and the script fail. -->
-    <a href="/trucks-owner-dashboard2/">Open it now</a>
+<div class="wrap">
+  <div class="brand"><img class="mark" src="icon-192.png" alt="" width="36" height="36"><h1>Everything</h1></div>
+  <p class="today" id="today"></p>
+
+  <div class="grid">
+    <a class="tile wide" href="/menu-generator/">
+      <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      <b>This week's menu</b><span>Build it, check allergens, download the sheet</span></a>
+
+    <a class="tile" href="/all-trucks/">
+      <svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7"/><path d="M12 13v7"/></svg>
+      <b>Stock</b><span>Kitchen, Mamma Mia, Montana’s</span></a>
+
+    <a class="tile" href="/money/">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5h4a1.9 1.9 0 0 1 0 3.8h-3a1.9 1.9 0 0 0 0 3.8h4"/></svg>
+      <b>Money</b><span>What you charge and what it costs</span></a>
+
+    <a class="tile" href="/trucks-owner-dashboard2/">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg>
+      <b>Owner dashboard</b><span>All four businesses at once</span></a>
   </div>
+
+  <div class="sec">One at a time</div>
+  <div class="grid">
+    <a class="tile" href="/kitchen-stock/">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7l2-3h12l2 3M9 12h6"/></svg>
+      <b>Kitchen stock</b><span>The kitchen's own count</span></a>
+    <a class="tile" href="/panatieris-pizza/">
+      <svg viewBox="0 0 24 24"><path d="M12 3 3 20h18z"/><circle cx="10.5" cy="14" r="1.1"/><circle cx="13.5" cy="17" r="1.1"/></svg>
+      <b>Panatieri's Pizza</b><span>Stock and price comparison</span></a>
+    <a class="tile" href="/panatieris-on-wheels/">
+      <svg viewBox="0 0 24 24"><path d="M3 16V8h11v8"/><path d="M14 11h4l3 3v2h-7z"/><circle cx="7" cy="17.5" r="1.9"/><circle cx="17" cy="17.5" r="1.9"/></svg>
+      <b>Mamma Mia Truck</b><span>Stock on its own</span></a>
+    <a class="tile" href="/montanas-breakfast-truck/">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      <b>Montana's Breakfast</b><span>Stock on its own</span></a>
+  </div>
+
+  <p class="foot">Everything is stored on the device you are using. Back each app up
+  now and then from inside it.</p>
+</div>
 <script>
-  /* replace(), not assign(): this page must not sit in the back history, or
-     tapping Back from the dashboard would bounce you straight forward again. */
-  location.replace('/trucks-owner-dashboard2/');
+  var d = new Date();
+  document.getElementById("today").textContent =
+    d.toLocaleDateString(undefined, {weekday:"long", day:"numeric", month:"long"});
 </script>
+<!-- ============================================================ SHELL v1
+     The bar that makes the separate apps feel like one product.  Paste this
+     block, unchanged, immediately before </body> in every app.  It is
+     self-contained on purpose: no shared file to fetch, so one app going wrong
+     cannot take the others with it.
+
+     To add it to another app, change only ACTIVE below to that app's key.
+     Canonical copy: ~/Desktop/claude/shell/shell-snippet.html
+     ============================================================ -->
+<style>
+.mmshell{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;
+  border-top:1px solid #e3e3e6;display:grid;grid-template-columns:repeat(5,1fr);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+  box-shadow:0 -2px 14px rgba(0,0,0,.06);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.mmshell a,.mmshell button{display:flex;flex-direction:column;align-items:center;gap:3px;
+  text-decoration:none;color:#6b6b76;font-size:9.5px;font-weight:800;letter-spacing:.3px;
+  padding:3px 0;background:none;border:0;cursor:pointer;font-family:inherit}
+.mmshell svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+.mmshell .on{color:#B5191C}
+/* On a laptop a full-width bottom bar looks like a mistake, so it becomes a
+   floating pill instead of disappearing. */
+@media(min-width:900px){
+  .mmshell{left:50%;transform:translateX(-50%);right:auto;bottom:18px;width:auto;
+    grid-template-columns:repeat(5,86px);border:1px solid #e3e3e6;border-radius:16px;
+    padding:8px 6px;box-shadow:0 10px 30px rgba(0,0,0,.16)}
+}
+.mmsheet{position:fixed;inset:0;z-index:61;background:rgba(10,10,13,.5);display:none;
+  align-items:flex-end;justify-content:center}
+.mmsheet.on{display:flex}
+.mmsheet .in{background:#fff;width:100%;max-width:460px;border-radius:16px 16px 0 0;
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom));max-height:70vh;overflow:auto}
+@media(min-width:900px){ .mmsheet{align-items:center} .mmsheet .in{border-radius:16px} }
+.mmsheet h4{margin:6px 16px 8px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b6b76}
+.mmsheet a{display:block;padding:12px 16px;text-decoration:none;
+  color:#111;font-size:14px;font-weight:700;border-top:1px solid #f0f0f3}
+.mmsheet a small{display:block;font-size:11px;color:#6b6b76;font-weight:600;margin-top:2px}
+.mmsheet .close{width:100%;padding:13px;border:0;background:none;color:#6b6b76;font-weight:800;
+  font-size:13px;border-top:1px solid #f0f0f3;cursor:pointer}
+body{padding-bottom:62px}
+@media(min-width:900px){ body{padding-bottom:0} }
+</style>
+<nav class="mmshell" id="mmshell"></nav>
+<div class="mmsheet" id="mmsheet"><div class="in">
+  <h4>Everything else</h4>
+  <a href="https://jaylaantaylor-boop.github.io/trucks-owner-dashboard2/">Owner dashboard<small>All four businesses in one screen</small></a>
+  <a href="https://jaylaantaylor-boop.github.io/kitchen-stock/">Kitchen stock<small>The kitchen's own count</small></a>
+  <a href="https://jaylaantaylor-boop.github.io/panatieris-pizza/">Panatieri's Pizza<small>Stock and price comparison</small></a>
+  <a href="https://jaylaantaylor-boop.github.io/panatieris-on-wheels/">Mamma Mia Truck<small>Stock on its own</small></a>
+  <a href="https://jaylaantaylor-boop.github.io/montanas-breakfast-truck/">Montana's Breakfast<small>Stock on its own</small></a>
+  <button class="close" id="mmclose">Close</button>
+</div></div>
+<script>
+(function(){
+  var ACTIVE = "home";      /* <-- the only line that changes per app */
+  var I = {
+    home:  '<path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/>',
+    menus: '<rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    stock: '<path d="M3 8.5 12 4l9 4.5-9 4.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7"/><path d="M12 13v7"/>',
+    money: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5h4a1.9 1.9 0 0 1 0 3.8h-3a1.9 1.9 0 0 0 0 3.8h4"/>',
+    more:  '<circle cx="5.5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/>'
+  };
+  var TABS = [
+    {k:"home",  t:"Home",  u:"https://jaylaantaylor-boop.github.io/"},
+    {k:"menus", t:"Menus", u:"https://jaylaantaylor-boop.github.io/menu-generator/"},
+    {k:"stock", t:"Stock", u:"https://jaylaantaylor-boop.github.io/all-trucks/"},
+    {k:"money", t:"Money", u:"https://jaylaantaylor-boop.github.io/money/"},
+    {k:"more",  t:"More"}
+  ];
+  var nav = document.getElementById("mmshell");
+  nav.innerHTML = TABS.map(function(t){
+    var svg = '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[t.k]+'</svg>';
+    var cls = t.k===ACTIVE ? ' class="on"' : '';
+    return t.u ? '<a href="'+t.u+'"'+cls+'>'+svg+t.t+'</a>'
+               : '<button type="button" id="mmmore"'+cls+'>'+svg+t.t+'</button>';
+  }).join("");
+  var sheet = document.getElementById("mmsheet");
+  var open = function(on){ sheet.classList.toggle("on", on); };
+  document.getElementById("mmmore").onclick = function(){ open(true); };
+  document.getElementById("mmclose").onclick = function(){ open(false); };
+  sheet.addEventListener("click", function(e){ if(e.target===sheet) open(false); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") open(false); });
+})();
+</script>
+<!-- ========================================================= END SHELL v1 -->
+
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load", function(){
+    navigator.serviceWorker.register("sw.js").catch(function(){});
+  });
+}
+</script>
+
 </body>
 </html>
